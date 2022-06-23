@@ -18,6 +18,10 @@ class Item:
         """Return all of the information about this item."""
         return f"Item name: {self.name}\nItem source: {self.source}"
 
+    def name_with_source(self) -> str:
+        """Return the item name and the source as a string"""
+        return f"{self.name} ({self.source})"
+
 def main() -> None:
     """The main function to execute when the calc module is called"""
     print("Hello world! I'm calc. Nice to meet you.")
