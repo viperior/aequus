@@ -40,7 +40,7 @@ class RecipeComponent:
         self.item = item
         self.quantity = quantity
         self.component_type = component_type
-        assert self.component_type in ["reactant", "product"] # Validate the component type
+        assert self.component_type in ["reactant", "product"]  # Validate the component type
 
     def info(self) -> str:
         """Return the information about this recipe component."""
