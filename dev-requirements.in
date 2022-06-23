@@ -1,0 +1,5 @@
+coverage==6.4.1
+psutil==5.9.1
+pylint==2.14.3
+pytest==7.1.2
+pytest-xdist==2.5.0
