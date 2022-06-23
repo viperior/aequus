@@ -1,0 +1,2 @@
+# aequus
+Recursive recipe calculator
