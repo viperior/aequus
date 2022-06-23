@@ -32,6 +32,12 @@ Explanation:
 2 Log = 8 Oak Planks = 16 Sticks
 ```
 
+## How do I test it?
+
+```bash
+python -m pytest
+```
+
 ## Features
 
 - Recursive calculation of raw materials
