@@ -16,3 +16,14 @@ You can use this program for cooking recipes in real life, crafting recipes in s
 - Support for probabilistic ingredients (things create through a chance-based process)
 - Define jobs to produce n quantity of an item and calculate the raw materials needed for the job
 - Define multiple recipes per product
+
+## Object model
+
+| Entity | Definition | Example |
+| ------ | ---------- | ------- |
+| Item | Something that exists in a stable form, whether it can be made or gathered from the natural world | Stick |
+| RecipeComponent | A combination of an item and a quantity | 2 Oak Planks |
+| Reactant | A RecipeComponent that is used to create one or more products | 2 Oak Planks |
+| Product | A RecipeComponent that is created from one or more reactants in a recipe | 4 Sticks |
+| Recipe | A group of reactants and products | 2 Oak Planks = 4 Sticks |
+| Job | A combination of a Recipe and number of runs | (2 Oak Planks = 4 Sticks) * 2 runs |
