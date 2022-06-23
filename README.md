@@ -32,7 +32,6 @@ Explanation:
 1 Log = 4 Oak Planks = 16 Sticks
 ```
 
-
 ## Features
 
 - Recursive calculation of raw materials
