@@ -55,7 +55,7 @@ Explanation:
 
 ### Figure 1 - A Job to create 16 Sticks
 
-![Figure 1 - A Job to create 16 Sticks](object_model_job.svg)
+![Figure 1 - A Job to create 16 Sticks](docs/images/object_model_job.svg)
 
 ### Mathematical equation for stick crafting
 
