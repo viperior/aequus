@@ -26,10 +26,10 @@ Product: Stick
 Target quantity: 16
 
 Bill of raw materials:
-1 Log
+2 Log
 
 Explanation:
-1 Log = 4 Oak Planks = 16 Sticks
+2 Log = 8 Oak Planks = 16 Sticks
 ```
 
 ## Features
@@ -56,3 +56,55 @@ Explanation:
 ### Figure 1 - A Job to create 16 Sticks
 
 ![Figure 1 - A Job to create 16 Sticks](object_model_job.svg)
+
+### Mathematical equation for stick crafting
+
+The following equations are a mathematical expression of crafting 16 sticks. It models the full series of subcomponents, tracing back to the Log raw material.
+
+Step 1 - Express the chain of recipes to craft 16 sticks
+
+$$ \frac{16\, Sticks}{1}\cdot\frac{2\, Oak\,Planks}{4\, Sticks}\cdot\frac{1\,Log}{4\,Oak\,Planks} $$
+
+Step 2 - Reduce fractions
+
+$$ \frac{\cancel{\color{red}{16}}\,4\, Sticks}{1}\cdot\frac{2\, Oak\,Planks}{\cancel{\color{red}{4}}\,1\, Sticks}\cdot\frac{1\,Log}{4\,Oak\,Planks} $$
+
+$$ \frac{4\, Sticks}{1}\cdot\frac{2\, Oak\,Planks}{1\, Sticks}\cdot\frac{1\,Log}{4\,Oak\,Planks} $$
+
+$$ \frac{4\, Sticks}{1}\cdot\frac{\cancel{\color{red}{2}}\,1\, Oak\,Planks}{1\, Sticks}\cdot\frac{1\,Log}{\cancel{\color{red}{4}}\,2\,Oak\,Planks} $$
+
+$$ \frac{4\, Sticks}{1}\cdot\frac{1\, Oak\,Planks}{1\, Sticks}\cdot\frac{1\,Log}{2\,Oak\,Planks} $$
+
+Step 3 - Cancel like units
+
+$$ \frac{4\, \cancel{\color{red}{Sticks}}}{1}\cdot\frac{1\, Oak\,Planks}{1\, \cancel{\color{red}{Sticks}}}\cdot\frac{1\,Log}{2\,Oak\,Planks} $$
+
+$$ \frac{4}{1}\cdot\frac{1\, Oak\,Planks}{1}\cdot\frac{1\,Log}{2\,Oak\,Planks} $$
+
+$$ \frac{4}{1}\cdot\frac{1\, \cancel{\color{red}{Oak\,Planks}}}{1}\cdot\frac{1\,Log}{2\,\cancel{\color{red}{Oak\,Planks}}} $$
+
+$$ \frac{4}{1}\cdot\frac{1}{1}\cdot\frac{1\,Log}{2} $$
+
+Step 4 - Apply the identity property of multiplication (n * 1 = n)
+
+$$ \frac{4}{1}\cdot\cancel{\color{red}{\frac{1}{1}}}\cdot\frac{1\,Log}{2} $$
+
+$$ \frac{4}{1}\cdot\frac{1\,Log}{2} $$
+
+Step 5 - Multiply fractions
+
+$$ \frac{4\cdot1\,Log}{1\cdot2} $$
+
+$$ \frac{4\,Log}{2} $$
+
+Step 6 - Reduce fraction
+
+$$ \frac{\cancel{\color{red}{4}}\,2\,Log}{\cancel{\color{red}{2}}\,1} $$
+
+$$ \frac{2\,Log}{1} $$
+
+Step 7 - Apply the identity property of division
+
+$$ 2\,Log $$
+
+$$ 16\,Sticks = 2\,Log $$
