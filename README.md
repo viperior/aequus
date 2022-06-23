@@ -51,3 +51,7 @@ Explanation:
 | `Job` | A combination of a `Recipe`, the desired `Product`, and a target quantity | Recipe: (2 Oak Planks = 4 Sticks), Product: Sticks, Target quantity: 16 |
 | `ItemDatabase` | A collection of known `Items` | Stick, Button, Oak Planks |
 | `RecipeDatabase` | A collection of `Recipes` associated with `Products` | Product: Stick, Recipe: 2 Oak Planks = 4 Sticks |
+
+### Figure 1 - A Job to create 16 Sticks
+
+![Figure 1 - A Job to create 16 Sticks](object_model_job.svg)
