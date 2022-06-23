@@ -1,5 +1,6 @@
 """Recipe calculator module"""
 
+
 class Item:
     """This is a class to represent items that exist in a stable form, whether it can be made or
     must be gathered from the natural world.
@@ -10,7 +11,7 @@ class Item:
         sources
     """
 
-    def __init__(self, name: str, source: str="Unknown"):
+    def __init__(self, name: str, source: str = "Unknown"):
         self.name = name
         self.source = source
 
@@ -22,9 +23,11 @@ class Item:
         """Return the item name and the source as a string"""
         return f"{self.name} ({self.source})"
 
+
 def main() -> None:
     """The main function to execute when the calc module is called"""
     print("Hello world! I'm calc. Nice to meet you.")
+
 
 if __name__ == "__main__":
     main()

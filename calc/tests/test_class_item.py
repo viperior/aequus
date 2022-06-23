@@ -2,6 +2,7 @@
 
 import calc
 
+
 def test_item_creation() -> None:
     """Test the creation of an Item object"""
     stick_item = calc.Item(name="Stick", source="Minecraft")
