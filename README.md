@@ -48,6 +48,6 @@ Explanation:
 | `Reactant` | A `RecipeComponent` that is used to create one or more `Products` | 2 Oak Planks |
 | `Product` | A `RecipeComponent` that is created from one or more `Reactants` in a recipe | 4 Sticks |
 | `Recipe` | A group of `Reactants` and `Products` | 2 Oak Planks = 4 Sticks |
-| `Job` | A combination of a `Recipe` and a target quantity | Recipe: (2 Oak Planks = 4 Sticks), Target quantity: 12 |
+| `Job` | A combination of a `Recipe`, the desired `Product`, and a target quantity | Recipe: (2 Oak Planks = 4 Sticks), Product: Sticks, Target quantity: 16 |
 | `ItemDatabase` | A collection of known `Items` | Stick, Button, Oak Planks |
 | `RecipeDatabase` | A collection of `Recipes` associated with `Products` | Product: Stick, Recipe: 2 Oak Planks = 4 Sticks |
