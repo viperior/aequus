@@ -36,13 +36,23 @@ class RecipeComponent:
     quantity (float): The quantity of the item. It has a float data type to allow precise
         calculations and probabilistic quantities.
     component_type (str): The category of component (reactant or product)
+    is_probabilistic (bool): A bool indicating whether the product is probabilistic (chance-based),
+        such as the 10% chance of creating Sand when pulverizing Cobblestone
+    is_consumed (bool): A bool indicating whether the component is consumed upon execution of the
+        recipe
     """
-
-    def __init__(self, item: Item, quantity: float, component_type: str):
+    def __init__(self, item: Item, quantity: float, component_type: str,
+                 is_probabilistic: bool = False, is_consumed: bool = True):
         self.item = item
         self.quantity = quantity
         self.component_type = component_type
         assert self.component_type in ["reactant", "product"]  # Validate the component type
+        self.is_probabilistic = is_probabilistic
+        self.is_consumed = is_consumed
+
+        # Only products can be probabilistic.
+        if component_type == "reactant":
+            assert not is_probabilistic
 
     def info(self) -> str:
         """Return the information about this recipe component."""
@@ -54,7 +64,13 @@ class RecipeComponent:
 
     def text(self, include_source: bool = False) -> str:
         """Return a string with the quantity and item name"""
-        output_text = f"{self.quantity} "
+        output_text = f"{self.quantity}"
+
+        # Indicate that this component is probabilistic.
+        if self.is_probabilistic:
+            output_text += "(p)"
+
+        output_text += " "
 
         if include_source:
             output_text += self.item.name_with_source()
