@@ -1,5 +1,7 @@
 """Recipe calculator module"""
 
+import logging
+
 
 class Item:
     """This is a class to represent items that exist in a stable form, whether it can be made or
@@ -46,6 +48,65 @@ class RecipeComponent:
         """Return the information about this recipe component."""
         return f"{self.component_type.capitalize()}: {self.text()}"
 
-    def text(self) -> str:
+    def key(self) -> str:
+        """Return a string that uniquely identifies this RecipeComponent object."""
+        return self.text(include_source=True)
+
+    def text(self, include_source: bool = False) -> str:
         """Return a string with the quantity and item name"""
-        return f"{self.quantity} {self.item.name}"
+        output_text = f"{self.quantity} "
+
+        if include_source:
+            output_text += self.item.name_with_source()
+        else:
+            output_text += self.item.name
+
+        return output_text
+
+
+class Recipe:
+    """A Recipe is a collection of one or more reactants and one or more products
+
+    Attributes:
+    reactants (dict): A dictionary of reactant-key-and-reactant-object pairs used to create the
+        product(s)
+    products (dict): A dictionary of product-key-and-product-object pairs created from the
+        reactant(s)
+    """
+    def __init__(self) -> None:
+        self.reactants = {}
+        self.products = {}
+
+    def component_text(self, component_type: str) -> str:
+        """Return a string describing the components used in this Recipe"""
+        output_text = ""
+
+        if component_type == "reactant":
+            components = self.reactants
+        else:
+            components = self.products
+
+        for index, component_key in enumerate(components):
+            if index > 0:
+                output_text += " + "
+
+            output_text += components[component_key].key()
+
+        return output_text
+
+    def key(self) -> None:
+        """Return a string that uniquely identifies this Recipe object."""
+        return f"{self.component_text('reactants')} = {self.component_text('products')}"
+
+    def register_component(self, component: RecipeComponent) -> None:
+        """Register a new reactant in the Recipe"""
+        if component.component_type == "reactant":
+            storage_target = self.reactants
+        else:
+            storage_target = self.products
+
+        if component.key() in storage_target:
+            logging.info("Cannot register new %s because it already exists in this recipe:\n\
+                %s", component.component_type, component.key())
+        else:
+            storage_target[component.key()] = component
