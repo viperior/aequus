@@ -7,8 +7,8 @@ import calc
 
 def test_recipe_creation(item_stick: calc.Item, item_plank: calc.Item) -> None:
     """Test the creation of a Recipe object"""
-    plank_component = calc.RecipeComponent(item=item_plank, quantity=2, component_type="reactant")
-    stick_component = calc.RecipeComponent(item=item_stick, quantity=4, component_type="product")
+    plank_component = calc.Reactant(item=item_plank, quantity=2)
+    stick_component = calc.Product(item=item_stick, quantity=4)
     stick_recipe = calc.Recipe()
     stick_recipe.register_component(plank_component)
     stick_recipe.register_component(stick_component)
@@ -19,7 +19,7 @@ def test_recipe_creation(item_stick: calc.Item, item_plank: calc.Item) -> None:
 
 
 def test_recipe_component_deduplication(recipe_stick: calc.Recipe,
-                                        component_plank_reactant: calc.RecipeComponent) -> None:
+                                        component_plank_reactant: calc.Reactant) -> None:
     """Ensure that duplicate RecipeComponents can't be registered in a recipe"""
     assert len(recipe_stick.reactants) == 1
     recipe_stick.register_component(component=component_plank_reactant)
