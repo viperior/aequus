@@ -14,11 +14,11 @@ def fixture_component_plank_reactant(item_plank: calc.Item) -> calc.RecipeCompon
 
 
 @pytest.fixture(name="component_stick_product")
-def fixture_component_stick_product(item_plank: calc.Item) -> calc.RecipeComponent:
+def fixture_component_stick_product(item_stick: calc.Item) -> calc.RecipeComponent:
     """Return a test RecipeComponent object representing the Sticks items created by the Sticks
     Recipe.
     """
-    return calc.RecipeComponent(item=item_plank, quantity=4, component_type="product")
+    return calc.RecipeComponent(item=item_stick, quantity=4, component_type="product")
 
 
 @pytest.fixture(name="item_plank")
