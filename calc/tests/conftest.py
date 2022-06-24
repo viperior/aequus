@@ -33,6 +33,53 @@ def fixture_item_stick() -> calc.Item:
     return calc.Item(name="Sticks", source="Minecraft")
 
 
+@pytest.fixture(name="recipe_sand_pulverizer_secondary")
+def fixture_recipe_sand_pulverizer_secondary() -> calc.Recipe:
+    """Return a test Recipe object representing the Recipe to create Sand as a probabilistic,
+    secondary output using Cobblestone and a Thermal Foundation Pulverizer.
+    """
+    recipe_sand = calc.Recipe()
+    recipe_sand.register_component(
+        calc.RecipeComponent(
+            item=calc.Item(name="Cobblestone", source="Minecraft"),
+            quantity=1,
+            component_type="reactant"
+        )
+    )
+    recipe_sand.register_component(
+        calc.RecipeComponent(
+            item=calc.Item(name="Minecraft Joules", source="BuildCraft"),
+            quantity=320,
+            component_type="reactant"
+        )
+    )
+    recipe_sand.register_component(
+        calc.RecipeComponent(
+            item=calc.Item(name="Pulverizer", source="Thermal Foundation"),
+            quantity=1,
+            component_type="reactant",
+            is_consumed=False
+        )
+    )
+    recipe_sand.register_component(
+        calc.RecipeComponent(
+            item=calc.Item(name="Gravel", source="Minecraft"),
+            quantity=1,
+            component_type="product"
+        )
+    )
+    recipe_sand.register_component(
+        calc.RecipeComponent(
+            item=calc.Item(name="Sand", source="Minecraft"),
+            quantity=0.1,
+            component_type="product",
+            is_probabilistic=True
+        )
+    )
+
+    return recipe_sand
+
+
 @pytest.fixture(name="recipe_stick")
 def fixture_recipe_stick(component_plank_reactant: calc.RecipeComponent,
                          component_stick_product: calc.RecipeComponent) -> calc.Recipe:
