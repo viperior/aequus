@@ -5,6 +5,14 @@ import logging
 import calc
 
 
+def test_recipe_component_deduplication(recipe_stick: calc.Recipe,
+                                        component_plank_reactant: calc.Reactant) -> None:
+    """Ensure that duplicate RecipeComponents can't be registered in a recipe"""
+    assert len(recipe_stick.reactants) == 1
+    recipe_stick.register_component(component=component_plank_reactant)
+    assert len(recipe_stick.reactants) == 1
+
+
 def test_recipe_creation(item_stick: calc.Item, item_plank: calc.Item) -> None:
     """Test the creation of a Recipe object"""
     plank_component = calc.Reactant(item=item_plank, quantity=2)
@@ -16,14 +24,6 @@ def test_recipe_creation(item_stick: calc.Item, item_plank: calc.Item) -> None:
     assert len(stick_recipe.products) == 1
     assert plank_component.key() in stick_recipe.reactants
     assert stick_component.key() in stick_recipe.products
-
-
-def test_recipe_component_deduplication(recipe_stick: calc.Recipe,
-                                        component_plank_reactant: calc.Reactant) -> None:
-    """Ensure that duplicate RecipeComponents can't be registered in a recipe"""
-    assert len(recipe_stick.reactants) == 1
-    recipe_stick.register_component(component=component_plank_reactant)
-    assert len(recipe_stick.reactants) == 1
 
 
 def test_recipe_key(recipe_stick: calc.Recipe) -> None:
