@@ -77,26 +77,33 @@ class Recipe:
         self.reactants = {}
         self.products = {}
 
-    def component_text(self, component_type: str) -> str:
-        """Return a string describing the components used in this Recipe"""
+    def key(self) -> None:
+        """Return a string that uniquely identifies this Recipe object."""
+        return f"{self.reactant_text()} = {self.product_text()}"
+
+    def product_text(self) -> str:
+        """Return a string describing the products created by this Recipe."""
         output_text = ""
 
-        if component_type == "reactant":
-            components = self.reactants
-        else:
-            components = self.products
-
-        for index, component_key in enumerate(components):
+        for index, component_key in enumerate(self.products):
             if index > 0:
                 output_text += " + "
 
-            output_text += components[component_key].key()
+            output_text += self.products[component_key].key()
 
         return output_text
 
-    def key(self) -> None:
-        """Return a string that uniquely identifies this Recipe object."""
-        return f"{self.component_text('reactants')} = {self.component_text('products')}"
+    def reactant_text(self) -> str:
+        """Return a string describing the reactants used in this Recipe."""
+        output_text = ""
+
+        for index, component_key in enumerate(self.reactants):
+            if index > 0:
+                output_text += " + "
+
+            output_text += self.reactants[component_key].key()
+
+        return output_text
 
     def register_component(self, component: RecipeComponent) -> None:
         """Register a new reactant in the Recipe"""
