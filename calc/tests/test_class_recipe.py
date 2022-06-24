@@ -16,16 +16,9 @@ def test_recipe_creation(item_stick: calc.Item, item_plank: calc.Item) -> None:
     assert stick_component.key() in stick_recipe.products
 
 
-def test_recipe_component_deduplication() -> None:
+def test_recipe_component_deduplication(recipe_stick: calc.Recipe,
+                                        component_plank_reactant: calc.RecipeComponent) -> None:
     """Ensure that duplicate RecipeComponents can't be registered in a recipe"""
-    recipe = calc.Recipe()
-    component = calc.RecipeComponent(
-        item=calc.Item("Oak Planks", source="Minecraft"),
-        quantity=2,
-        component_type="reactant"
-    )
-
-    for _ in range(2):
-        recipe.register_component(component=component)
-
-    assert len(recipe.reactants) == 1
+    assert len(recipe_stick.reactants) == 1
+    recipe_stick.register_component(component=component_plank_reactant)
+    assert len(recipe_stick.reactants) == 1
