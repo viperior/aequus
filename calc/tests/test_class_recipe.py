@@ -1,5 +1,7 @@
 """Tests for the Recipe class"""
 
+import logging
+
 import calc
 
 
@@ -22,3 +24,9 @@ def test_recipe_component_deduplication(recipe_stick: calc.Recipe,
     assert len(recipe_stick.reactants) == 1
     recipe_stick.register_component(component=component_plank_reactant)
     assert len(recipe_stick.reactants) == 1
+
+
+def test_recipe_key(recipe_stick: calc.Recipe) -> None:
+    """Test the key() method of the Recipe class."""
+    logging.debug("Recipe for sticks: %s", recipe_stick.key())
+    assert recipe_stick.key() == "2 Oak Planks (Minecraft) = 4 Sticks (Minecraft)"
