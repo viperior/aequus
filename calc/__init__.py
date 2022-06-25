@@ -168,7 +168,7 @@ class Recipe:
         return output_text
 
     def register_component(self, component) -> None:
-        """Register a new reactant in the Recipe"""
+        """Register a new Reactant or Product in the Recipe."""
         if isinstance(component, Reactant):
             storage_target = self.reactants
         else:
