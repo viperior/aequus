@@ -139,6 +139,25 @@ class Recipe:
         self.reactants = {}
         self.products = {}
 
+    def is_valid(self) -> bool:
+        """Return a Boolean value indicating whether this Recipe object is valid."""
+        has_reactants = len(self.reactants) > 0
+        has_products = len(self.products) > 0
+        has_problem = not (has_reactants and has_products)
+
+        if not has_reactants:
+            logging.error("This Recipe contains no reactants!\nReactants:%s",
+                          self.reactants)
+
+        if not has_products:
+            logging.error("This Recipe contains no products!\nProducts:%s",
+                          self.products)
+
+        if has_problem:
+            logging.error("Invalid recipe information:\n%s", self.key())
+
+        return has_reactants and has_products
+
     def key(self) -> None:
         """Return a string that uniquely identifies this Recipe object."""
         return f"{self.reactant_text()} = {self.product_text()}"
@@ -194,20 +213,8 @@ class Job:
     def __init__(self, desired_item: Item, target_quantity: float, recipe: Recipe) -> None:
         self.desired_item = desired_item
         self.target_quantity = target_quantity
+        assert recipe.is_valid()
         self.recipe = recipe
-
-        # Validate the top-level recipe to ensure it contains at least one Reactant and Product.
-        if len(recipe.reactants) < 1:
-            logging.error("The top-level recipe for this Job contains no reactants!\nReactants:%s",
-                          recipe.reactants)
-
-        if len(recipe.products) < 1:
-            logging.error("The top-level recipe for this Job contains no products!\nProducts:%s",
-                          recipe.products)
-
-        assert len(recipe.reactants) > 0
-        assert len(recipe.products) > 0
-
         self.materials = {}
         self.initialize_materials()
         self.recipe_database = {}
