@@ -288,9 +288,9 @@ class Job:
         # Isolate the Product in the top-level recipe that matches the desired product for this Job.
         matching_recipe_product = None
 
-        for product_key in self.recipe.products:
-            if self.recipe.products[product_key].component.item.key() == self.desired_item.key():
-                matching_recipe_product = self.recipe.products[product_key]
+        for product in self.recipe.products.values():
+            if product.component.item.key() == self.desired_item.key():
+                matching_recipe_product = product
                 break
 
         # Ensure that a matching product is found
