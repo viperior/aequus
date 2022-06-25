@@ -219,8 +219,7 @@ class Job:
         matching_recipe_product = None
 
         for product_key in self.recipe.products:
-            if self.recipe.products[product_key].component.item.key() ==\
-                self.desired_item.key():
+            if self.recipe.products[product_key].component.item.key() == self.desired_item.key():
                 matching_recipe_product = self.recipe.products[product_key]
                 break
 
