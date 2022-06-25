@@ -242,6 +242,15 @@ class Job:
             if index > 0:
                 output_text += " + "
 
-            output_text += f"{self.materials[material_key]['quantity']} {material_key}"
+            # Apply rounding to material quantities
+            raw_quantity = self.materials[material_key]['quantity']
+            rounded_quantity = int(raw_quantity)
+
+            if raw_quantity == rounded_quantity:
+                display_quantity = rounded_quantity
+            else:
+                display_quantity = raw_quantity
+
+            output_text += f"{display_quantity} {material_key}"
 
         return output_text
