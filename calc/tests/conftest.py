@@ -33,6 +33,18 @@ def fixture_item_stick() -> calc.Item:
     return calc.Item(name="Sticks", source="Minecraft")
 
 
+@pytest.fixture(name="job_stick")
+def fixture_job_stick(item_stick: calc.Item, recipe_stick: calc.Recipe) -> calc.Item:
+    """Return a test Job object representing the crafting of 16 Sticks Items."""
+    job_stick = calc.Job(
+        desired_item=item_stick,
+        target_quantity=16,
+        recipe=recipe_stick
+    )
+
+    return job_stick
+
+
 @pytest.fixture(name="recipe_sand_pulverizer_secondary")
 def fixture_recipe_sand_pulverizer_secondary() -> calc.Recipe:
     """Return a test Recipe object representing the Recipe to create Sand as a probabilistic,
