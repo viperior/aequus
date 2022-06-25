@@ -13,7 +13,7 @@ class Item:
         sources
     """
 
-    def __init__(self, name: str, source: str = "Unknown"):
+    def __init__(self, name: str, source: str = "Unknown") -> None:
         self.name = name
         self.source = source
 
@@ -34,7 +34,7 @@ class RecipeComponent:
     quantity (float): The quantity of the item. It has a float data type to allow precise
         calculations and probabilistic quantities.
     """
-    def __init__(self, item: Item, quantity: float):
+    def __init__(self, item: Item, quantity: float) -> None:
         self.item = item
         self.quantity = quantity
 
