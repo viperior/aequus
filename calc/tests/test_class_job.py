@@ -222,10 +222,120 @@ def test_job_repeating_material() -> None:
             quantity=1
         )
     )
+    recipe_copper_ingot = calc.Recipe()
+    recipe_copper_ingot.register_component(
+        calc.Reactant(
+            item=item_copper_ore,
+            quantity=1
+        )
+    )
+    recipe_copper_ingot.register_component(
+        calc.Reactant(
+            item=item_coal,
+            quantity=0.125
+        )
+    )
+    recipe_copper_ingot.register_component(
+        calc.Reactant(
+            item=item_furnace,
+            quantity=1,
+            is_consumed=False
+        )
+    )
+    recipe_copper_ingot.register_component(
+        calc.Product(
+            item=item_copper_ingot,
+            quantity=1
+        )
+    )
+    recipe_tin_item_casing = calc.Recipe()
+    recipe_tin_item_casing.register_component(
+        calc.Reactant(
+            item=item_tin_plate,
+            quantity=1
+        )
+    )
+    recipe_tin_item_casing.register_component(
+        calc.Reactant(
+            item=item_metal_former,
+            quantity=1,
+            is_consumed=False
+        )
+    )
+    recipe_tin_item_casing.register_component(
+        calc.Product(
+            item=item_tin_item_casing,
+            quantity=2
+        )
+    )
+    recipe_coil = calc.Recipe()
+    recipe_coil.register_component(
+        calc.Reactant(
+            item=item_copper_cable,
+            quantity=8
+        )
+    )
+    recipe_coil.register_component(
+        calc.Reactant(
+            item=item_iron_ingot,
+            quantity=1
+        )
+    )
+    recipe_coil.register_component(
+        calc.Product(
+            item=item_coil,
+            quantity=1
+        )
+    )
+    recipe_tin_plate = calc.Recipe()
+    recipe_tin_plate.register_component(
+        calc.Reactant(
+            item=item_tin_ingot,
+            quantity=1
+        )
+    )
+    recipe_tin_plate.register_component(
+        calc.Reactant(
+            item=item_metal_former,
+            quantity=1,
+            is_consumed=False
+        )
+    )
+    recipe_tin_plate.register_component(
+        calc.Product(
+            item=item_tin_plate,
+            quantity=1
+        )
+    )
+    recipe_copper_cable = calc.Recipe()
+    recipe_copper_cable.register_component(
+        calc.Reactant(
+            item=item_copper_ingot,
+            quantity=1
+        )
+    )
+    recipe_copper_cable.register_component(
+        calc.Reactant(
+            item=item_metal_former,
+            quantity=1,
+            is_consumed=False
+        )
+    )
+    recipe_copper_cable.register_component(
+        calc.Product(
+            item=item_copper_cable,
+            quantity=3
+        )
+    )
     job_electric_motor.register_recipe_database(
         {
             "Iron Ingot (Minecraft)": recipe_iron_ingot,
-            "Tin Ingot (Thermal Foundation)": recipe_tin_ingot
+            "Tin Ingot (Thermal Foundation)": recipe_tin_ingot,
+            "Copper Ingot (Thermal Foundation)": recipe_copper_ingot,
+            "Tin Item Casing (IndustrialCraft 2)": recipe_tin_item_casing,
+            "Coil (IndustrialCraft 2)": recipe_coil,
+            "Tin Plate (Thermal Foundation)": recipe_tin_plate,
+            "Copper Cable (IndustrialCraft 2)": recipe_copper_cable,
         }
     )
     job_electric_motor.calculate_bill_of_materials()
