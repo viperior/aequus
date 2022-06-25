@@ -119,6 +119,12 @@ def test_job_repeating_material() -> None:
             quantity=1
         )
     )
+    recipe_electric_motor.register_component(
+        calc.Product(
+            item=item_electric_motor,
+            quantity=1
+        )
+    )
     job_electric_motor = calc.Job(
         desired_item=item_electric_motor,
         target_quantity=1,
