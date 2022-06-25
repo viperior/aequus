@@ -5,6 +5,16 @@ import logging
 import calc
 
 
+def test_probabilistic_recipe_key(recipe_sand_pulverizer_secondary: calc.Recipe) -> None:
+    """Test the key of a Recipe with a probabilistic component"""
+    logging.debug("Recipe to produce sand as a probabilistic output using the Pulverizer:\n%s",
+                  recipe_sand_pulverizer_secondary.key())
+    expected_result = "1 Cobblestone (Minecraft) + 320 Minecraft Joules (BuildCraft) + "
+    expected_result += "1 (nc) Pulverizer (Thermal Foundation) = 1 Gravel (Minecraft) + "
+    expected_result += "0.1 (p) Sand (Minecraft)"
+    assert recipe_sand_pulverizer_secondary.key() == expected_result
+
+
 def test_recipe_component_deduplication(recipe_stick: calc.Recipe,
                                         component_plank_reactant: calc.Reactant) -> None:
     """Ensure that duplicate RecipeComponents can't be registered in a recipe"""
