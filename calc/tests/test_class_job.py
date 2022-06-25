@@ -131,7 +131,12 @@ def test_job_repeating_material() -> None:
         recipe=recipe_electric_motor
     )
     job_electric_motor.calculate_bill_of_materials()
-    assert job_electric_motor.materials_text() == "placeholder"
+    assert "Iron Ore (Minecraft)" in job_electric_motor.materials
+    assert "Tin Ore (Thermal Foundation)" in job_electric_motor.materials
+    assert "Copper Ore (Thermal Foundation)" in job_electric_motor.materials
+    assert job_electric_motor.materials["Iron Ore (Minecraft)"]["quantity"] == 3
+    assert job_electric_motor.materials["Tin Ore (Thermal Foundation)"]["quantity"] == 1
+    assert job_electric_motor.materials["Copper Ore (Thermal Foundation)"]["quantity"] == 5.333
 
 
 def test_job_recipe_database_registration(recipe_sand_pulverizer_secondary: calc.Recipe) -> None:
