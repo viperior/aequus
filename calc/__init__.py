@@ -182,24 +182,66 @@ class Recipe:
 
 
 class Job:
-    """A Job consists of a desired Product, a target quantity of that Product to produce, a Recipe
-    to use to create the desired Product, and a BillOfMaterials that tracks the total raw materials
-    needed to complete the Job.
+    """A Job consists of a desired item, a target quantity of that item to produce, a Recipe to use
+    to create the desired item, and a BillOfMaterials that tracks the total raw materials needed to
+    complete the Job.
 
     Attributes:
-    desired_product (Item): The desired product to create through the Job
+    desired_item (Item): The desired item to create through the Job
     target_quantity (float): The desired quantity of product to produce through the Job
     recipe (Recipe): The top-level Recipe to use to create the desired product
     """
-    def __init__(self, desired_product: Item, target_quantity: float, recipe: Recipe) -> None:
-        self.desired_product = desired_product
+    def __init__(self, desired_item: Item, target_quantity: float, recipe: Recipe) -> None:
+        self.desired_item = desired_item
         self.target_quantity = target_quantity
         self.recipe = recipe
+        self.materials = {}
+        self.initialize_materials()
+
+    def calculate_bill_of_materials(self) -> None:
+        """Calculate the total raw materials required to complete this Job."""
+        pass
+
+    def initialize_materials(self) -> None:
+        """Initialize the raw materials dictionary using the top-level recipe for this Job."""
+        # Isolate the Product in the top-level recipe that matches the desired product for this Job.
+        matching_recipe_product = None
+
+        for product_key in self.recipe.products:
+            if self.recipe.products[product_key].component.item.name_with_source() ==\
+                self.desired_item.name_with_source():
+                matching_recipe_product = self.recipe.products[product_key]
+                break
+
+        # Ensure that a matching product is found
+        assert matching_recipe_product is not None and isinstance(matching_recipe_product, Product)
+
+        # Calculate the quantity modifier based on how many runs of the recipe are required to
+        # produce the target quantity for this Job.
+        quantity_modifier = self.target_quantity / matching_recipe_product.component.quantity
+
+        for reactant_key in self.recipe.reactants:
+            reactant = self.recipe.reactants[reactant_key]
+            self.materials[reactant.component.item.name_with_source()] = {
+                "quantity": reactant.component.quantity * quantity_modifier
+            }
 
     def key(self) -> str():
         """Return a string that uniquely identifies this Job."""
-        output_text = f"Job:\n\tDesired product: {self.desired_product.name}\n\t"
+        output_text = f"Job:\n\tDesired item: {self.desired_item.name}\n\t"
         output_text += f"Target quantity: {self.target_quantity}\n\tTop-level recipe: "
         output_text += f"{self.recipe.key()}"
+
+        return output_text
+
+    def materials_text(self) -> str():
+        """Return a string listing all the raw materials needed to complete this Job."""
+        output_text = ""
+
+        for index, material_key in enumerate(self.materials.keys()):
+            if index > 0:
+                output_text += " + "
+
+            output_text += f"{self.materials[material_key]['quantity']} {material_key}"
 
         return output_text
