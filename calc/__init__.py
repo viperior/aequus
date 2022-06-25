@@ -197,6 +197,7 @@ class Job:
         self.recipe = recipe
         self.materials = {}
         self.initialize_materials()
+        self.recipe_database = {}
 
     def calculate_bill_of_materials(self) -> None:
         """Calculate the total raw materials required to complete this Job."""
@@ -264,3 +265,7 @@ class Job:
             output_text += f"{display_quantity} {material_key}"
 
         return output_text
+
+    def register_recipe_database(self, recipe_database: dict) -> None:
+        """Register a recipe database, which is a collection of item keys and their recipes."""
+        self.recipe_database = recipe_database
