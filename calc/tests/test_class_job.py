@@ -6,7 +6,7 @@ import calc
 
 
 def test_job_bill_of_materials_calculation_complex(job_stick: calc.Job) -> None:
-    """Test the calculation of a BillOfMaterials for a Job to create 16 sticks"""
+    """Test the calculation of a bill of materials for a Job to create 16 Sticks"""
     recipe_oak_planks = calc.Recipe()
     recipe_oak_planks.register_component(
         calc.Reactant(
@@ -36,7 +36,7 @@ def test_job_bill_of_materials_calculation_complex(job_stick: calc.Job) -> None:
 
 
 def test_job_bill_of_materials_calculation_simple() -> None:
-    """Test the calculation of a BillOfMaterials for a Job to create 16 sticks"""
+    """Test the calculation of a bill of materials for a Job to create 1 Button"""
     recipe_button = calc.Recipe()
     recipe_button.register_component(
         calc.Reactant(
