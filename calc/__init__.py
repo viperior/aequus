@@ -200,7 +200,17 @@ class Job:
 
     def calculate_bill_of_materials(self) -> None:
         """Calculate the total raw materials required to complete this Job."""
-        pass
+        # Track whether any materials were converted into their raw materials in the last iteration.
+        expansion_performed = False
+        iteration_count = 0
+
+        while iteration_count == 0 or expansion_performed is True:
+            logging.debug("Material expansion iteration #%d", iteration_count)
+            logging.debug("Material expansion performed during last loop? = %s",
+                          expansion_performed)
+            logging.debug("Current materials at iteration start:\n%s", self.materials_text())
+            logging.debug("Current materials at iteration end:\n%s", self.materials_text())
+            iteration_count += 1
 
     def initialize_materials(self) -> None:
         """Initialize the raw materials dictionary using the top-level recipe for this Job."""
