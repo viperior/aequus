@@ -210,6 +210,76 @@ class Job:
             logging.debug("Material expansion performed during last loop? = %s",
                           expansion_performed)
             logging.debug("Current materials at iteration start:\n%s", self.materials_text())
+
+            # Create a temporary dictionary to store replaced materials.
+            replacement_materials = {}
+
+            # Begin each pass through the material list with the expansion sentry set to False.
+            expansion_performed = False
+
+            for material_key, material in self.materials.items():
+                # Determine whether there is a Recipe with a Product matching the current material.
+                if material_key in self.recipe_database:
+                    logging.debug("A Recipe was found in the database for the material, %s",
+                                  material_key)
+                    matching_recipe = self.recipe_database[material_key]
+                    logging.debug("Matching recipe:\n%s", matching_recipe.key())
+
+                    # Expand the material using its matching Recipe.
+                    # Isolate the Product in the matching recipe that matches the desired product
+                    # for this material.
+                    matching_recipe_product = None
+
+                    for product in matching_recipe.products.values():
+                        if product.component.item.key() == material_key:
+                            matching_recipe_product = product
+                            break
+
+                    # Ensure that a matching product is found.
+                    assert matching_recipe_product is not None and\
+                        isinstance(matching_recipe_product, Product)
+
+                    # Calculate the quantity modifier based on how many runs of the matching recipe
+                    # are required to produce the target quantity for this material.
+                    quantity_modifier = material["quantity"] /\
+                        matching_recipe_product.component.quantity
+
+                    # Add each Reactant from the matching Recipe with adjusted quantities to the
+                    # collection replacement materials.
+                    for reactant in matching_recipe.reactants.values():
+                        additional_quantity = reactant.component.quantity * quantity_modifier
+                        reactant_item_key = reactant.component.item.key()
+
+                        if reactant_item_key in replacement_materials:
+                            # Add to existing material if the material is already present.
+                            logging.debug("Existing material, %s, quantity increasing by %f",
+                                          reactant_item_key, additional_quantity)
+                            logging.debug("Quantity BEFORE addition from replacement: %f",
+                                          replacement_materials[reactant_item_key]["quantity"])
+                            replacement_materials[reactant_item_key]["quantity"] +=\
+                                additional_quantity
+                            logging.debug("Quantity AFTER addition from replacement: %f",
+                                          replacement_materials[reactant_item_key]["quantity"])
+                        else:
+                            # Create new material entry for newly identified materials.
+                            logging.debug("Creating new material entry for new material, %s",
+                                          reactant_item_key)
+                            logging.debug("Quantity of new material = %f", additional_quantity)
+                            replacement_materials[reactant_item_key] = {
+                                "quantity": additional_quantity
+                            }
+
+                    expansion_performed = True
+                else:
+                    logging.debug("A Recipe was NOT found in the database for the material, %s",
+                                  material_key)
+
+                    # Add the unmodified material to the replacement material dictionary.
+                    replacement_materials[material_key] = material
+
+            if expansion_performed:
+                self.materials = replacement_materials
+
             logging.debug("Current materials at iteration end:\n%s", self.materials_text())
             iteration_count += 1
 
