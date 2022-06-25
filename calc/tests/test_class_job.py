@@ -80,6 +80,54 @@ def test_job_creation(item_stick: calc.Item, recipe_stick: calc.Recipe) -> None:
     assert job_stick.key() == expected_text
 
 
+def test_job_repeating_material() -> None:
+    """Test a Job that uses the same material at multiple levels of the recipe hierarchy to ensure
+    test coverage of the material combination logic defined in the Job class.
+    """
+    item_tin_item_casing = calc.Item(
+        name="Tin Item Casing",
+        source="IndustrialCraft 2"
+    )
+    item_coil = calc.Item(
+        name="Coil",
+        source="IndustrialCraft 2"
+    )
+    item_iron_ingot = calc.Item(
+        name="Iron Ingot",
+        source="Minecraft"
+    )
+    item_electric_motor = calc.Item(
+        name="Electric Motor",
+        source="IndustrialCraft 2"
+    )
+    recipe_electric_motor = calc.Recipe()
+    recipe_electric_motor.register_component(
+        calc.Reactant(
+            item=item_tin_item_casing,
+            quantity=2
+        )
+    )
+    recipe_electric_motor.register_component(
+        calc.Reactant(
+            item=item_coil,
+            quantity=2
+        )
+    )
+    recipe_electric_motor.register_component(
+        calc.Reactant(
+            item=item_iron_ingot,
+            quantity=1
+        )
+    )
+    job_electric_motor = calc.Job(
+        desired_item=item_electric_motor,
+        target_quantity=1,
+        recipe=recipe_electric_motor
+    )
+    job_electric_motor.calculate_bill_of_materials()
+    assert job_electric_motor.materials_text() == "placeholder"
+
+
 def test_job_recipe_database_registration(recipe_sand_pulverizer_secondary: calc.Recipe) -> None:
     """Test the registration of a recipe database for a Job object."""
     item_glass = calc.Item(
