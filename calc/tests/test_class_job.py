@@ -100,6 +100,46 @@ def test_job_repeating_material() -> None:
         name="Electric Motor",
         source="IndustrialCraft 2"
     )
+    item_tin_ingot = calc.Item(
+        name="Tin Ingot",
+        source="Thermal Foundation"
+    )
+    item_copper_ingot = calc.Item(
+        name="Copper Ingot",
+        source="Thermal Foundation"
+    )
+    item_iron_ore = calc.Item(
+        name="Iron Ore",
+        source="Minecraft"
+    )
+    item_tin_ore = calc.Item(
+        name="Tin Ore",
+        source="Thermal Foundation"
+    )
+    item_copper_ore = calc.Item(
+        name="Copper Ore",
+        source="Thermal Foundation"
+    )
+    item_tin_plate = calc.Item(
+        name="Tin Plate",
+        source="Thermal Foundation"
+    )
+    item_copper_cable = calc.Item(
+        name="Copper Cable",
+        source="IndustrialCraft 2"
+    )
+    item_coal = calc.Item(
+        name="Coal",
+        source="Minecraft"
+    )
+    item_furnace = calc.Item(
+        name="Furnace",
+        source="Minecraft"
+    )
+    item_metal_former = calc.Item(
+        name="Metal Former",
+        source="IndustrialCraft 2"
+    )
     recipe_electric_motor = calc.Recipe()
     recipe_electric_motor.register_component(
         calc.Reactant(
@@ -129,6 +169,64 @@ def test_job_repeating_material() -> None:
         desired_item=item_electric_motor,
         target_quantity=1,
         recipe=recipe_electric_motor
+    )
+    recipe_iron_ingot = calc.Recipe()
+    recipe_iron_ingot.register_component(
+        calc.Reactant(
+            item=item_iron_ore,
+            quantity=1
+        )
+    )
+    recipe_iron_ingot.register_component(
+        calc.Reactant(
+            item=item_coal,
+            quantity=0.125
+        )
+    )
+    recipe_iron_ingot.register_component(
+        calc.Reactant(
+            item=item_furnace,
+            quantity=1,
+            is_consumed=False
+        )
+    )
+    recipe_iron_ingot.register_component(
+        calc.Product(
+            item=item_iron_ingot,
+            quantity=1
+        )
+    )
+    recipe_tin_ingot = calc.Recipe()
+    recipe_tin_ingot.register_component(
+        calc.Reactant(
+            item=item_tin_ore,
+            quantity=1
+        )
+    )
+    recipe_tin_ingot.register_component(
+        calc.Reactant(
+            item=item_coal,
+            quantity=0.125
+        )
+    )
+    recipe_tin_ingot.register_component(
+        calc.Reactant(
+            item=item_furnace,
+            quantity=1,
+            is_consumed=False
+        )
+    )
+    recipe_tin_ingot.register_component(
+        calc.Product(
+            item=item_tin_ingot,
+            quantity=1
+        )
+    )
+    job_electric_motor.register_recipe_database(
+        {
+            "Iron Ingot (Minecraft)": recipe_iron_ingot,
+            "Tin Ingot (Thermal Foundation)": recipe_tin_ingot
+        }
     )
     job_electric_motor.calculate_bill_of_materials()
     assert "Iron Ore (Minecraft)" in job_electric_motor.materials
