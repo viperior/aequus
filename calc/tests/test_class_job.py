@@ -7,6 +7,30 @@ import calc
 
 def test_job_bill_of_materials_calculation_complex(job_stick: calc.Job) -> None:
     """Test the calculation of a BillOfMaterials for a Job to create 16 sticks"""
+    recipe_oak_planks = calc.Recipe()
+    recipe_oak_planks.register_component(
+        calc.Reactant(
+            item=calc.Item(
+                name="Oak Wood",
+                source="Minecraft"
+            ),
+            quantity=1
+        )
+    )
+    recipe_oak_planks.register_component(
+        calc.Product(
+            item=calc.Item(
+                name="Oak Planks",
+                source="Minecraft"
+            ),
+            quantity=4
+        )
+    )
+    job_stick.register_recipe_database(
+        {
+            "Oak Planks (Minecraft)": recipe_oak_planks
+        }
+    )
     job_stick.calculate_bill_of_materials()
     assert job_stick.materials_text() == "2 Oak Wood (Minecraft)"
 
