@@ -267,6 +267,10 @@ class Job:
                     # Add each Reactant from the matching Recipe with adjusted quantities to the
                     # collection replacement materials.
                     for reactant in matching_recipe.reactants.values():
+                        # Skip non-consumable materials
+                        if not reactant.is_consumed:
+                            continue
+
                         additional_quantity = reactant.component.quantity * quantity_modifier
                         reactant_item_key = reactant.component.item.key()
 
