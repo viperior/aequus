@@ -5,7 +5,7 @@ import calc
 
 def test_item_creation(item_stick: calc.Item) -> None:
     """Test the creation of an Item object"""
-    assert item_stick.name_with_source() == "Sticks (Minecraft)"
+    assert item_stick.key() == "Sticks (Minecraft)"
 
 
 def test_item_info(item_stick: calc.Item) -> None:

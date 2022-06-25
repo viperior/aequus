@@ -21,7 +21,7 @@ class Item:
         """Return all of the information about this item."""
         return f"Item name: {self.name}\nItem source: {self.source}"
 
-    def name_with_source(self) -> str:
+    def key(self) -> str:
         """Return the item name and the source as a string"""
         return f"{self.name} ({self.source})"
 
@@ -47,7 +47,7 @@ class RecipeComponent:
         output_text = f"{self.quantity} "
 
         if include_source:
-            output_text += self.item.name_with_source()
+            output_text += self.item.key()
         else:
             output_text += self.item.name
 
@@ -83,7 +83,7 @@ class Product:
             output_text += "(p) "
 
         if include_source:
-            output_text += self.component.item.name_with_source()
+            output_text += self.component.item.key()
         else:
             output_text += self.component.item.name
 
@@ -119,7 +119,7 @@ class Reactant:
             output_text += "(nc) "
 
         if include_source:
-            output_text += self.component.item.name_with_source()
+            output_text += self.component.item.key()
         else:
             output_text += self.component.item.name
 
@@ -219,8 +219,8 @@ class Job:
         matching_recipe_product = None
 
         for product_key in self.recipe.products:
-            if self.recipe.products[product_key].component.item.name_with_source() ==\
-                self.desired_item.name_with_source():
+            if self.recipe.products[product_key].component.item.key() ==\
+                self.desired_item.key():
                 matching_recipe_product = self.recipe.products[product_key]
                 break
 
@@ -233,7 +233,7 @@ class Job:
 
         for reactant_key in self.recipe.reactants:
             reactant = self.recipe.reactants[reactant_key]
-            self.materials[reactant.component.item.name_with_source()] = {
+            self.materials[reactant.component.item.key()] = {
                 "quantity": reactant.component.quantity * quantity_modifier
             }
 

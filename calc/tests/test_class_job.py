@@ -106,7 +106,7 @@ def test_job_recipe_database_registration(recipe_sand_pulverizer_secondary: calc
         name="Sand",
         source="Minecraft"
     )
-    recipe_database = {item_sand.name_with_source(): recipe_sand_pulverizer_secondary}
+    recipe_database = {item_sand.key(): recipe_sand_pulverizer_secondary}
     logging.debug("Glass job information:\n%s", job_glass.materials_text())
     job_glass.register_recipe_database(recipe_database=recipe_database)
     logging.debug("Recipe database for Sand recipe:\n%s", job_glass.recipe_database)
