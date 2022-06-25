@@ -179,3 +179,27 @@ class Recipe:
                          type(component), component.key())
         else:
             storage_target[component.key()] = component
+
+
+class Job:
+    """A Job consists of a desired Product, a target quantity of that Product to produce, a Recipe
+    to use to create the desired Product, and a BillOfMaterials that tracks the total raw materials
+    needed to complete the Job.
+
+    Attributes:
+    desired_product (Item): The desired product to create through the Job
+    target_quantity (float): The desired quantity of product to produce through the Job
+    recipe (Recipe): The top-level Recipe to use to create the desired product
+    """
+    def __init__(self, desired_product: Item, target_quantity: float, recipe: Recipe) -> None:
+        self.desired_product = desired_product
+        self.target_quantity = target_quantity
+        self.recipe = recipe
+
+    def key(self) -> str():
+        """Return a string that uniquely identifies this Job."""
+        output_text = f"Job:\n\tDesired product: {self.desired_product.name}\n\t"
+        output_text += f"Target quantity: {self.target_quantity}\n\tTop-level recipe: "
+        output_text += f"{self.recipe.key()}"
+
+        return output_text
