@@ -195,6 +195,19 @@ class Job:
         self.desired_item = desired_item
         self.target_quantity = target_quantity
         self.recipe = recipe
+
+        # Validate the top-level recipe to ensure it contains at least one Reactant and Product.
+        if len(recipe.reactants) < 1:
+            logging.error("The top-level recipe for this Job contains no reactants!\nReactants:%s",
+                          recipe.reactants)
+
+        if len(recipe.products) < 1:
+            logging.error("The top-level recipe for this Job contains no products!\nProducts:%s",
+                          recipe.products)
+
+        assert len(recipe.reactants) > 0
+        assert len(recipe.products) > 0
+
         self.materials = {}
         self.initialize_materials()
         self.recipe_database = {}
