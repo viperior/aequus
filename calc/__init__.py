@@ -294,7 +294,8 @@ class Job:
                 break
 
         # Ensure that a matching product is found
-        assert matching_recipe_product is not None and isinstance(matching_recipe_product, Product)
+        assert matching_recipe_product is not None
+        assert isinstance(matching_recipe_product, Product)
 
         # Calculate the quantity modifier based on how many runs of the recipe are required to
         # produce the target quantity for this Job.
