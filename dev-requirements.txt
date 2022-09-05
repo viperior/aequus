@@ -28,7 +28,7 @@ platformdirs==2.5.2
     # via pylint
 pluggy==1.0.0
     # via pytest
-psutil==5.9.1
+psutil==5.9.2
     # via -r dev-requirements.in
 py==1.11.0
     # via
