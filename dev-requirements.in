@@ -1,5 +1,5 @@
 coverage==6.4.3
-psutil==5.9.1
+psutil==5.9.4
 pylint==2.14.5
 pytest==7.1.2
 pytest-xdist==2.5.0

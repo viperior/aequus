@@ -28,7 +28,7 @@ platformdirs==2.5.2
     # via pylint
 pluggy==1.0.0
     # via pytest
-psutil==5.9.1
+psutil==5.9.4
     # via -r dev-requirements.in
 py==1.11.0
     # via
@@ -48,9 +48,7 @@ pytest-forked==1.4.0
 pytest-xdist==2.5.0
     # via -r dev-requirements.in
 tomli==2.0.1
-    # via
-    #   pylint
-    #   pytest
+    # via pytest
 tomlkit==0.11.0
     # via pylint
 wrapt==1.14.1
