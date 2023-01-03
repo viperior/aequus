@@ -8,7 +8,7 @@ astroid==2.11.6
     # via pylint
 attrs==21.4.0
     # via pytest
-coverage==6.4.3
+coverage==7.0.2
     # via -r dev-requirements.in
 dill==0.3.5.1
     # via pylint
@@ -48,9 +48,7 @@ pytest-forked==1.4.0
 pytest-xdist==2.5.0
     # via -r dev-requirements.in
 tomli==2.0.1
-    # via
-    #   pylint
-    #   pytest
+    # via pytest
 tomlkit==0.11.0
     # via pylint
 wrapt==1.14.1
